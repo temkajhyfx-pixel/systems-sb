@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SYSTEMS-SB | Инженерные системы под ключ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7ecfff;
+      --bg: #050a10;
+      --panel: #0d141d;
+      --text: #ffffff;
+      --text-dim: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    header { height: 90px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+    .logo { font-weight: 800; font-size: 24px; text-decoration: none; color: #fff; }
+    .logo span { color: var(--primary); }
+    .header-contacts { display: flex; align-items: center; gap: 20px; }
+    .phone { color: #fff; text-decoration: none; font-weight: 700; font-size: 16px; white-space: nowrap; }
+
+    .btn {
+      padding: 14px 28px; border-radius: 12px; border: 1px solid var(--primary);
+      font-weight: 800; cursor: pointer; font-family: inherit; font-size: 12px;
+      text-transform: uppercase; transition: 0.3s; background: transparent; color: var(--primary);
+      display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
+    }
+    .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px rgba(126, 207, 255, 0.4); }
+
+    .btn-animate { background: var(--primary); color: #000; animation: pulse 2s infinite; border: none; }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(126, 207, 255, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(126, 207, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(126, 207, 255, 0); }
+    }
+
+    .hero { padding: 80px 0 60px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
+    h1 { font-size: clamp(34px, 5vw, 60px); font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
+    h1 span { color: var(--primary); }
+    .hero p { color: var(--text-dim); font-size: 18px; max-width: 550px; margin-bottom: 35px; }
+
+    .hero-box { background: var(--panel); border: 1px solid var(--border); border-radius: 24px; padding: 35px; }
+    .hero-box h3 { font-size: 20px; margin-bottom: 20px; color: var(--primary); }
+    .hero-box li { margin-bottom: 15px; border-left: 2px solid var(--primary); padding-left: 15px; font-size: 14px; color: var(--text-dim); list-style: none; }
+    .hero-box li b { color: #fff; display: block; font-size: 16px; }
+
+    .about-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 60px 0; border-top: 1px solid var(--border); }
+    .about-text h2 { font-size: 32px; margin-bottom: 20px; color: var(--primary); }
+    .about-text p { color: var(--text-dim); margin-bottom: 20px; font-size: 17px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .stat-item { background: var(--panel); padding: 25px; border-radius: 20px; border: 1px solid var(--border); }
+    .stat-item h5 { font-size: 30px; color: var(--primary); font-weight: 800; margin-bottom: 5px; }
+    .stat-item p { font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+
+    .section-title { font-size: 28px; font-weight: 800; margin: 80px 0 40px; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .card { background: var(--panel); border: 1px solid var(--border); padding: 40px; border-radius: 20px; transition: 0.3s; }
+    .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+    .card h4 { color: var(--primary); font-size: 20px; margin-bottom: 15px; }
+
+    .step-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 35px; border-radius: 20px; }
+    .step-card span { font-size: 40px; font-weight: 800; color: rgba(126, 207, 255, 0.1); display: block; margin-bottom: -15px; }
+
+    .map-box { 
+      height: 450px; border-radius: 24px; overflow: hidden; border: 1px solid var(--border); margin: 60px 0;
+      filter: grayscale(1) contrast(1.2) opacity(0.8); transition: 0.5s ease;
+    }
+    .map-box:hover { filter: none; opacity: 1; border-color: var(--primary); }
+
+    /* ПЛАШКА ВЫЕЗДА */
+    .promo-bar {
+      position: fixed; 
+      bottom: -200px; /* Полностью скрыта */
+      left: 50%; 
+      transform: translateX(-50%);
+      background: var(--primary); 
+      color: #000; 
+      padding: 12px 25px; 
+      border-radius: 50px;
+      display: flex; 
+      align-items: center; 
+      gap: 15px; 
+      font-weight: 800; 
+      z-index: 9999;
+      box-shadow: 0 10px 40px rgba(126, 207, 255, 0.5); 
+      transition: bottom 1s cubic-bezier(0.17, 0.84, 0.44, 1);
+      width: max-content; 
+      max-width: 95%;
+      pointer-events: none;
+    }
+    .promo-bar.show { 
+      bottom: 30px; 
+      pointer-events: auto;
+    }
+    .promo-bar .close-promo { cursor: pointer; font-size: 22px; opacity: 0.6; padding-left: 10px; }
+
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 10000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+    .modal-overlay.active { display: flex; opacity: 1; }
+    .modal-content { background: var(--panel); padding: 40px; border-radius: 24px; border: 1px solid var(--border); width: 100%; max-width: 500px; position: relative; }
+    .close-modal { position: absolute; top: 20px; right: 20px; font-size: 30px; cursor: pointer; color: var(--text-dim); }
+    .input-group { margin-bottom: 20px; }
+    .input-group label { display: block; font-size: 12px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; font-weight: 700; }
+    .input-group input, .input-group textarea { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 15px; color: #fff; font-family: inherit; outline: none; }
+
+    .gallery-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 8000; display: none; justify-content: flex-end; opacity: 0; transition: 0.4s; }
+    .gallery-overlay.active { display: flex; opacity: 1; }
+    .gallery-panel { width: 100%; max-width: 850px; height: 100%; background: var(--bg); transform: translateX(100%); transition: 0.5s; padding: 50px; overflow-y: auto; border-left: 1px solid var(--border); }
+    .gallery-overlay.active .gallery-panel { transform: translateX(0); }
+    .work-cat { margin-bottom: 60px; }
+    .work-cat h3 { color: var(--primary); margin-bottom: 20px; font-size: 20px; text-transform: uppercase; letter-spacing: 1px; }
+
+    .slider { position: relative; height: 400px; background: #000; border-radius: 15px; overflow: hidden; border: 1px solid var(--border); }
+    .slide { position: absolute; inset: 0; opacity: 0; transition: 0.6s; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: var(--text-dim); }
+    .slide.active { opacity: 1; }
+    .nav-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--primary); border: none; cursor: pointer; font-weight: bold; pointer-events: auto; }
+
+    footer { padding: 40px 0; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 13px; text-align: center; }
+
+    @media (max-width: 768px) {
+      header { height: auto; padding: 20px 0; flex-direction: column; gap: 15px; }
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .about-section { grid-template-columns: 1fr; gap: 30px; }
+      .promo-bar { width: 92%; font-size: 11px; padding: 10px 18px; }
+      .promo-bar.show { bottom: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <a href="#" class="logo">SYSTEMS<span>SB</span></a>
+    <div class="header-contacts">
+      <a href="tel:+78122441238" class="phone">8 (812) 244-12-38</a>
+      <button class="btn btn-animate" onclick="toggleModal(true)">Связаться</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Инженерные системы <span>под ключ</span></h1>
+      <p>Профессиональный монтаж систем безопасности и электрики в Санкт-Петербурге с гарантией 5 лет.</p>
+      <button class="btn" style="padding: 18px 36px;" onclick="openGallery()">Портфолио работ</button>
+    </div>
+    <div class="hero-box">
+      <h3>Наши преимущества</h3>
+      <ul>
+        <li><b>Фикс. смета</b> Цена не меняется после договора.</li>
+        <li><b>Гарантия 5 лет</b> Своя служба сервиса.</li>
+        <li><b>ГОСТ нормы</b> Монтаж согласно ПУЭ и стандартам.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="about-text">
+      <h2>О компании SYSTEMS-SB</h2>
+      <p>Мы создаем надежные инженерные решения для защиты и комфорта вашего бизнеса и дома. Наша команда — это дипломированные инженеры с опытом работы более 10 лет.</p>
+      <p>Мы берем на себя полный цикл: от проектирования и закупки оборудования до финального монтажа и обслуживания.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item"><h5>10+</h5><p>Лет на рынке</p></div>
+      <div class="stat-item"><h5>500+</h5><p>Объектов</p></div>
+      <div class="stat-item"><h5>100%</h5><p>ГОСТ</p></div>
+      <div class="stat-item"><h5>24/7</h5><p>Сервис</p></div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Наши Услуги</h2>
+  <div class="grid">
+    <div class="card"><h4>Видеонаблюдение</h4><p>IP и Аналог, удаленный доступ и видеоаналитика.</p></div>
+    <div class="card"><h4>Электромонтаж</h4><p>Сборка щитового оборудования и разводка сетей.</p></div>
+    <div class="card"><h4>СКУД</h4><p>Биометрия, домофония и учет рабочего времени.</p></div>
+    <div class="card"><h4>Слаботочка</h4><p>Локальные сети (ЛВС), серверные и Wi-Fi мосты.</p></div>
+  </div>
+
+  <h2 class="section-title">Этапы работы</h2>
+  <div class="grid">
+    <div class="step-card"><span>01</span><h4>Аудит</h4><p>Бесплатный выезд и замер объекта.</p></div>
+    <div class="step-card"><span>02</span><h4>Расчет</h4><p>Подготовка детальной сметы за 24 часа.</p></div>
+    <div class="step-card"><span>03</span><h4>Запуск</h4><p>Монтаж, настройка и обучение работе.</p></div>
+  </div>
+
+  <div class="map-box">
+    <iframe src="https://yandex.ru/map-widget/v1/?ll=30.435721%2C59.976523&mode=search&ol=biz&oid=165814526365&pt=30.435721%2C59.976523%2Cpm2rdl&z=17" width="100%" height="100%" frameborder="0"></iframe>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 SYSTEMS-SB | Санкт-Петербург, пр. Энергетиков, д. 70 Б, офис 204 А | info@systems-sb.ru</p>
+</footer>
+
+<div class="promo-bar" id="promo">
+  <span>⚡️ Бесплатный выезд на замер сегодня!</span>
+  <button class="btn" style="padding: 8px 16px; font-size: 10px; border-color: #000; color: #000; background: #fff;" onclick="toggleModal(true)">Записаться</button>
+  <span class="close-promo" onclick="closePromo()">×</span>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="toggleModal(false)">×</span>
+    <h2 style="margin-bottom: 25px; color: var(--primary);">Оставить заявку</h2>
+    <div class="input-group"><label>Имя</label><input type="text" placeholder="Иван"></div>
+    <div class="input-group"><label>Телефон</label><input type="tel" placeholder="+7"></div>
+    <div class="input-group"><label>Описание задачи</label><textarea rows="3"></textarea></div>
+    <button class="btn" style="width: 100%; background: var(--primary); color: #000;">Отправить</button>
+  </div>
+</div>
+
+<div class="gallery-overlay" id="gal">
+  <div class="gallery-panel">
+    <span style="font-size: 45px; cursor: pointer; float: right; margin-top: -20px;" onclick="closeGallery()">×</span>
+    <h2 style="margin-bottom: 40px;">Наши выполненные проекты</h2>
+    
+    <div class="work-cat">
+      <h3>Видеонаблюдение</h3>
+      <div class="slider">
+        <div class="slide active" style="background-color:#111;">[Фото: Объект Видео 1]</div>
+        <div class="slide" style="background-color:#222;">[Фото: Объект Видео 2]</div>
+        <div style="position:absolute; inset:0; display:flex; justify-content:space-between; align-items:center; padding:0 20px; pointer-events:none;">
+          <button class="nav-btn" style="pointer-events:auto;" onclick="move(this, -1)">←</button>
+          <button class="nav-btn" style="pointer-events:auto;" onclick="move(this, 1)">→</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-cat">
+      <h3>Электромонтажные работы</h3>
+      <div class="slider">
+        <div class="slide active" style="background-color:#111;">[Фото: Объект Электро 1]</div>
+        <div class="slide" style="background-color:#222;">[Фото: Объект Электро 2]</div>
+        <div style="position:absolute; inset:0; display:flex; justify-content:space-between; align-items:center; padding:0 20px; pointer-events:none;">
+          <button class="nav-btn" style="pointer-events:auto;" onclick="move(this, -1)">←</button>
+          <button class="nav-btn" style="pointer-events:auto;" onclick="move(this, 1)">→</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-cat">
+      <h3>Системы контроля доступа (СКУД)</h3>
+      <div class="slider">
+        <div class="slide active" style="background-color:#111;">[Фото: Объект СКУД 1]</div>
+        <div class="slide" style="background-color:#222;">[Фото: Объект СКУД 2]</div>
+        <div style="position:absolute; inset:0; display:flex; justify-content:space-between; align-items:center; padding:0 20px; pointer-events:none;">
+          <button class="nav-btn" style="pointer-events:auto;" onclick="move(this, -1)">←</button>
+          <button class="nav-btn" style="pointer-events:auto;" onclick="move(this, 1)">→</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-cat">
+      <h3>Слаботочные сети и ЛВС</h3>
+      <div class="slider">
+        <div class="slide active" style="background-color:#111;">[Фото: Объект Слаботочка 1]</div>
+        <div class="slide" style="background-color:#222;">[Фото: Объект Слаботочка 2]</div>
+        <div style="position:absolute; inset:0; display:flex; justify-content:space-between; align-items:center; padding:0 20px; pointer-events:none;">
+          <button class="nav-btn" style="pointer-events:auto;" onclick="move(this, -1)">←</button>
+          <button class="nav-btn" style="pointer-events:auto;" onclick="move(this, 1)">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleModal(show) {
+    const m = document.getElementById('modal');
+    if(show) { 
+      m.style.display = 'flex'; 
+      setTimeout(() => m.classList.add('active'), 10); 
+    } else { 
+      m.classList.remove('active'); 
+      setTimeout(() => m.style.display = 'none', 300); 
+    }
+  }
+
+  function openGallery() {
+    const g = document.getElementById('gal');
+    g.style.display = 'flex'; 
+    setTimeout(() => g.classList.add('active'), 10);
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGallery() {
+    const g = document.getElementById('gal');
+    g.classList.remove('active'); 
+    setTimeout(() => g.style.display = 'none', 500);
+    document.body.style.overflow = '';
+  }
+
+  function move(btn, d) {
+    const slides = btn.closest('.slider').querySelectorAll('.slide');
+    let i = Array.from(slides).findIndex(x => x.classList.contains('active'));
+    slides[i].classList.remove('active');
+    i = (i + d + slides.length) % slides.length;
+    slides[i].classList.add('active');
+  }
+
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      const promo = document.getElementById('promo');
+      if(promo) promo.classList.add('show');
+    }, 800); 
+  });
+
+  function closePromo() {
+    document.getElementById('promo').classList.remove('show');
+  }
+</script>
+
+</body>
+</html>
