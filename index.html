@@ -1,0 +1,2441 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYSTEMS-SB | Системы безопасности и электромонтаж под ключ</title>
+<meta name="description" content="SYSTEMS-SB — проектирование, монтаж и обслуживание систем безопасности и электромонтажных работ для коммерческих, административных и производственных объектов.">
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#1e3a8a;
+  --primary-dark:#172f6b;
+  --dark:#0f172a;
+  --bg:#f8fafc;
+  --text:#1e293b;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --white:#ffffff;
+  --success:#0f766e;
+  --danger:#dc2626;
+  --shadow:0 18px 50px rgba(15,23,42,.08);
+  --shadow-strong:0 24px 70px rgba(15,23,42,.14);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:Manrope,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+  overflow-x:hidden;
+}
+
+body.modal-open,
+body.menu-open{
+  overflow:hidden;
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+.container{
+  max-width:1240px;
+  margin:0 auto;
+  padding:0 20px;
+}
+
+.section-head{
+  margin-bottom:42px;
+}
+
+.title{
+  font-size:36px;
+  line-height:1.08;
+  font-weight:800;
+  text-align:center;
+  color:var(--dark);
+  margin-bottom:14px;
+}
+
+.subtitle{
+  max-width:820px;
+  margin:0 auto;
+  text-align:center;
+  font-size:17px;
+  color:var(--muted);
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1200;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(226,232,240,.85);
+}
+
+.header-inner{
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.3px;
+  white-space:nowrap;
+}
+
+.logo span{
+  color:var(--primary);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  flex:1;
+  justify-content:center;
+}
+
+.nav a{
+  font-size:14px;
+  font-weight:700;
+  color:var(--muted);
+  position:relative;
+  transition:.25s;
+}
+
+.nav a:after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:0;
+  height:2px;
+  background:var(--primary);
+  transition:.25s;
+}
+
+.nav a:hover{
+  color:var(--primary);
+}
+
+.nav a:hover:after{
+  width:100%;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.header-phone{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  line-height:1.15;
+}
+
+.header-phone a{
+  font-size:18px;
+  font-weight:800;
+  color:var(--dark);
+}
+
+.header-phone span{
+  font-size:12px;
+  font-weight:700;
+  color:var(--muted);
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:13px 24px;
+  border-radius:14px;
+  border:2px solid var(--primary);
+  background:none;
+  color:var(--primary);
+  font-weight:800;
+  font-size:14px;
+  cursor:pointer;
+  transition:.25s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(30,58,138,.12);
+}
+
+.btn-main{
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
+}
+
+.btn-main:hover{
+  background:var(--primary-dark);
+  border-color:var(--primary-dark);
+}
+
+.btn-light{
+  background:#fff;
+  border:1px solid var(--line);
+  color:var(--dark);
+}
+
+.btn-danger{
+  background:var(--danger);
+  border-color:var(--danger);
+  color:#fff;
+}
+
+.btn-danger:hover{
+  background:#b91c1c;
+  border-color:#b91c1c;
+}
+
+.burger{
+  display:none;
+  width:46px;
+  height:46px;
+  border:none;
+  border-radius:14px;
+  background:#eff6ff;
+  color:var(--primary);
+  font-size:22px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.mobile-menu{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.5);
+  z-index:1400;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:.25s;
+}
+
+.mobile-menu.active{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.mobile-menu-panel{
+  position:absolute;
+  top:0;
+  right:0;
+  width:min(88vw,360px);
+  height:100%;
+  background:#fff;
+  padding:22px 18px 26px;
+  box-shadow:-20px 0 60px rgba(15,23,42,.18);
+  transform:translateX(100%);
+  transition:.3s;
+  display:flex;
+  flex-direction:column;
+}
+
+.mobile-menu.active .mobile-menu-panel{
+  transform:translateX(0);
+}
+
+.mobile-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.mobile-close{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:#f1f5f9;
+  font-size:24px;
+  cursor:pointer;
+}
+
+.mobile-links{
+  display:grid;
+  gap:8px;
+  margin-top:8px;
+}
+
+.mobile-links a{
+  padding:14px 14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  font-weight:700;
+  color:var(--dark);
+  background:#fff;
+}
+
+.mobile-actions{
+  margin-top:auto;
+  display:grid;
+  gap:10px;
+  padding-top:20px;
+}
+
+.mobile-phone{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#f8fafc;
+  display:grid;
+  gap:4px;
+}
+
+.mobile-phone strong{
+  font-size:18px;
+  color:var(--dark);
+}
+
+.mobile-phone span{
+  font-size:13px;
+  color:var(--muted);
+}
+
+section{
+  padding:90px 0;
+}
+
+.hero{
+  padding:74px 0 40px;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:24px;
+  align-items:stretch;
+}
+
+.hero-main,
+.hero-side{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+}
+
+.hero-main{
+  padding:50px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-main:before{
+  content:"";
+  position:absolute;
+  right:-90px;
+  top:-90px;
+  width:280px;
+  height:280px;
+  background:radial-gradient(circle, rgba(30,58,138,.14) 0%, rgba(30,58,138,0) 72%);
+  pointer-events:none;
+}
+
+.hero-label{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  background:#dbeafe;
+  color:var(--primary);
+  border-radius:999px;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:58px;
+  line-height:1.02;
+  font-weight:800;
+  color:var(--dark);
+  margin-bottom:18px;
+  max-width:780px;
+}
+
+.hero p{
+  font-size:19px;
+  color:var(--muted);
+  max-width:720px;
+  margin-bottom:24px;
+}
+
+.badges{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+}
+
+.badge{
+  padding:10px 15px;
+  border-radius:999px;
+  background:#eef2ff;
+  border:1px solid #c7d2fe;
+  color:var(--primary);
+  font-size:13px;
+  font-weight:800;
+}
+
+.hero-actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:22px;
+}
+
+.hero-note{
+  font-size:14px;
+  color:var(--muted);
+  max-width:680px;
+}
+
+.hero-side{
+  padding:26px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  justify-content:space-between;
+}
+
+.side-card{
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+  border-radius:22px;
+  padding:20px;
+}
+
+.side-card strong{
+  display:block;
+  font-size:16px;
+  color:var(--dark);
+  margin-bottom:8px;
+}
+
+.side-card p{
+  font-size:14px;
+  color:var(--muted);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.stat{
+  background:#f8fafc;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+}
+
+.stat-value{
+  font-size:28px;
+  font-weight:800;
+  color:var(--dark);
+  margin-bottom:4px;
+}
+
+.stat-label{
+  font-size:13px;
+  font-weight:700;
+  color:var(--muted);
+}
+
+.quick-strip{
+  padding-top:0;
+}
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.quick-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:var(--shadow);
+}
+
+.quick-card strong{
+  display:block;
+  font-size:16px;
+  margin-bottom:8px;
+  color:var(--dark);
+}
+
+.quick-card span{
+  font-size:14px;
+  color:var(--muted);
+}
+
+.trust-strip{
+  padding-top:8px;
+}
+
+.trust-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:18px 22px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.trust-item{
+  padding:16px;
+  border-radius:18px;
+  background:#f8fafc;
+  border:1px solid var(--line);
+}
+
+.trust-item strong{
+  display:block;
+  font-size:14px;
+  margin-bottom:6px;
+  color:var(--dark);
+}
+
+.trust-item span{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.card{
+  background:#fff;
+  padding:28px;
+  border-radius:22px;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  border-color:#bfdbfe;
+}
+
+.card-icon{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  background:#eff6ff;
+  margin-bottom:16px;
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:10px;
+  color:var(--dark);
+}
+
+.card p{
+  font-size:14px;
+  color:var(--muted);
+}
+
+.about-wrap{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:24px;
+}
+
+.about-main,
+.about-side{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:26px;
+  padding:34px;
+  box-shadow:var(--shadow);
+}
+
+.about-main h3,
+.about-side h3{
+  font-size:24px;
+  color:var(--dark);
+  margin-bottom:18px;
+}
+
+.about-main p{
+  font-size:16px;
+  color:#475569;
+  margin-bottom:16px;
+}
+
+.service-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin:24px 0;
+}
+
+.service-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 16px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#f8fafc;
+  font-size:14px;
+  font-weight:700;
+}
+
+.service-item:before{
+  content:"✓";
+  color:var(--success);
+  font-weight:800;
+}
+
+.info-stack{
+  display:grid;
+  gap:14px;
+}
+
+.info-card{
+  padding:18px;
+  border-radius:16px;
+  background:#f8fafc;
+  border:1px solid var(--line);
+}
+
+.info-card strong{
+  display:block;
+  margin-bottom:8px;
+  font-size:15px;
+  color:var(--dark);
+}
+
+.info-card span{
+  font-size:14px;
+  color:var(--muted);
+}
+
+.object-types{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+}
+
+.object-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+
+.object-card strong{
+  display:block;
+  font-size:16px;
+  color:var(--dark);
+  margin-bottom:8px;
+}
+
+.object-card span{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.service-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:28px;
+  box-shadow:var(--shadow);
+  transition:.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.service-card:before{
+  content:"";
+  position:absolute;
+  right:-50px;
+  top:-50px;
+  width:120px;
+  height:120px;
+  background:radial-gradient(circle, rgba(30,58,138,.08) 0%, rgba(30,58,138,0) 75%);
+}
+
+.service-card:hover{
+  transform:translateY(-6px);
+  border-color:#bfdbfe;
+}
+
+.service-icon{
+  font-size:28px;
+  margin-bottom:16px;
+  position:relative;
+  z-index:1;
+}
+
+.service-card h3{
+  font-size:19px;
+  margin-bottom:10px;
+  color:var(--dark);
+  position:relative;
+  z-index:1;
+}
+
+.service-card p{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:16px;
+  position:relative;
+  z-index:1;
+}
+
+.service-card ul{
+  padding-left:18px;
+  display:grid;
+  gap:8px;
+  font-size:14px;
+  color:#475569;
+  position:relative;
+  z-index:1;
+}
+
+.process-wrap{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:24px;
+  align-items:start;
+}
+
+.process-aside,
+.steps{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:26px;
+  box-shadow:var(--shadow);
+}
+
+.process-aside{
+  padding:34px;
+}
+
+.process-aside h3{
+  font-size:24px;
+  margin-bottom:14px;
+  color:var(--dark);
+}
+
+.process-aside p{
+  font-size:15px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+.aside-points{
+  display:grid;
+  gap:12px;
+}
+
+.aside-point{
+  padding:15px 16px;
+  border-radius:16px;
+  background:#f8fafc;
+  border:1px solid var(--line);
+  font-size:14px;
+  font-weight:700;
+  color:#334155;
+}
+
+.steps{
+  padding:24px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.step{
+  border:1px solid var(--line);
+  background:#f8fafc;
+  border-radius:20px;
+  padding:22px;
+}
+
+.step-number{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  background:var(--primary);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+.step h3{
+  font-size:17px;
+  margin-bottom:10px;
+  color:var(--dark);
+}
+
+.step p{
+  font-size:14px;
+  color:var(--muted);
+}
+
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.work-card{
+  height:360px;
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:#dbe4ee;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+}
+
+.work-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.55s;
+}
+
+.work-card:hover img{
+  transform:scale(1.08);
+}
+
+.work-info{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:24px 20px 20px;
+  background:linear-gradient(to top, rgba(0,0,0,.88), rgba(0,0,0,.08));
+  color:#fff;
+}
+
+.work-info h3{
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.work-info p{
+  font-size:14px;
+  color:rgba(255,255,255,.88);
+}
+
+.advantages-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.adv-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+
+.adv-card h3{
+  font-size:18px;
+  margin-bottom:10px;
+  color:var(--dark);
+}
+
+.adv-card p{
+  font-size:14px;
+  color:var(--muted);
+}
+
+.cta{
+  padding-top:24px;
+}
+
+.cta-box{
+  background:linear-gradient(135deg,#1e3a8a 0%,#0f172a 100%);
+  color:#fff;
+  border-radius:30px;
+  padding:44px;
+  box-shadow:var(--shadow-strong);
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;
+  align-items:center;
+}
+
+.cta-box h2{
+  font-size:36px;
+  line-height:1.08;
+  margin-bottom:12px;
+}
+
+.cta-box p{
+  font-size:16px;
+  color:rgba(255,255,255,.86);
+  max-width:760px;
+}
+
+.cta-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.faq{
+  display:grid;
+  gap:14px;
+  max-width:920px;
+  margin:0 auto;
+}
+
+.faq-item{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.faq-question{
+  width:100%;
+  border:none;
+  background:#fff;
+  text-align:left;
+  padding:20px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  cursor:pointer;
+  font-weight:800;
+  font-size:17px;
+  color:var(--dark);
+}
+
+.faq-question span:last-child{
+  font-size:22px;
+  color:var(--primary);
+  min-width:20px;
+  text-align:center;
+}
+
+.faq-answer{
+  padding:0 22px;
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s ease,padding .3s ease;
+}
+
+.faq-answer p{
+  font-size:15px;
+  color:var(--muted);
+  padding-bottom:0;
+}
+
+.faq-item.active .faq-answer{
+  max-height:220px;
+  padding:0 22px 20px;
+}
+
+.contacts-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:22px;
+}
+
+.contact-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:26px;
+  padding:32px;
+  box-shadow:var(--shadow);
+}
+
+.contact-card h3{
+  font-size:24px;
+  margin-bottom:18px;
+  color:var(--dark);
+}
+
+.contact-list{
+  display:grid;
+  gap:14px;
+  margin-bottom:22px;
+}
+
+.contact-item{
+  padding:16px 18px;
+  background:#f8fafc;
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+
+.contact-item strong{
+  display:block;
+  font-size:14px;
+  color:var(--dark);
+  margin-bottom:6px;
+}
+
+.contact-item span,
+.contact-item a{
+  font-size:15px;
+  color:var(--muted);
+}
+
+.contact-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.form-input,
+.form-select{
+  width:100%;
+  padding:14px 15px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:var(--text);
+  font-size:14px;
+  outline:none;
+  transition:.2s;
+}
+
+.form-input:focus,
+.form-select:focus{
+  border-color:#93c5fd;
+  box-shadow:0 0 0 4px rgba(147,197,253,.18);
+}
+
+textarea.form-input{
+  min-height:130px;
+  resize:none;
+}
+
+.checkbox{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  font-size:13px;
+  color:var(--muted);
+  margin:14px 0 18px;
+}
+
+.checkbox input{
+  margin-top:3px;
+}
+
+footer{
+  padding:40px 0 44px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.footer-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:26px;
+  box-shadow:var(--shadow);
+  padding:28px 30px;
+}
+
+.footer-top{
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:28px;
+  align-items:start;
+}
+
+.footer-company{
+  display:grid;
+  gap:6px;
+}
+
+.footer-company-title{
+  font-size:24px;
+  font-weight:800;
+  line-height:1.15;
+  color:var(--dark);
+}
+
+.footer-company-subtitle{
+  font-size:14px;
+  font-weight:700;
+  color:var(--primary);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+.footer-address{
+  font-size:18px;
+  line-height:1.45;
+  color:var(--text);
+  max-width:720px;
+}
+
+.footer-contacts{
+  display:grid;
+  gap:12px;
+  justify-items:end;
+  text-align:right;
+}
+
+.footer-contact-link{
+  font-size:26px;
+  font-weight:800;
+  line-height:1.2;
+  color:var(--dark);
+  transition:.2s;
+}
+
+.footer-contact-link:hover{
+  color:var(--primary);
+}
+
+.footer-contact-email{
+  font-size:22px;
+  font-weight:800;
+  line-height:1.25;
+  color:var(--dark);
+  transition:.2s;
+}
+
+.footer-contact-email span{
+  color:var(--primary);
+}
+
+.footer-contact-email:hover{
+  color:var(--primary);
+}
+
+.footer-bottom{
+  margin-top:24px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.72);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:.35s;
+  z-index:2000;
+}
+
+.modal.active{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.modal-content{
+  background:#fff;
+  width:100%;
+  max-width:780px;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:26px;
+  padding:34px;
+  position:relative;
+  transform:translateY(24px) scale(.96);
+  transition:.35s;
+  box-shadow:0 30px 80px rgba(0,0,0,.22);
+}
+
+.modal.active .modal-content{
+  transform:translateY(0) scale(1);
+}
+
+.modal-small{
+  max-width:580px;
+}
+
+.modal-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:#f1f5f9;
+  color:#0f172a;
+  font-size:24px;
+  line-height:1;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.2s;
+}
+
+.modal-close:hover{
+  background:#e2e8f0;
+}
+
+.modal-content h3{
+  font-size:28px;
+  margin-bottom:12px;
+  color:var(--dark);
+  padding-right:50px;
+}
+
+.modal-content h4{
+  font-size:18px;
+  color:var(--dark);
+  margin:20px 0 10px;
+}
+
+.modal-content p{
+  font-size:15px;
+  color:var(--muted);
+  margin-bottom:12px;
+}
+
+.modal-content ul{
+  padding-left:18px;
+  display:grid;
+  gap:8px;
+  font-size:14px;
+  color:#475569;
+  margin-bottom:16px;
+}
+
+.modal-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%) translateY(20px);
+  background:#0f172a;
+  color:#fff;
+  padding:14px 18px;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:700;
+  opacity:0;
+  visibility:hidden;
+  transition:.3s;
+  z-index:2500;
+  box-shadow:0 15px 35px rgba(15,23,42,.25);
+}
+
+.toast.show{
+  opacity:1;
+  visibility:visible;
+  transform:translateX(-50%) translateY(0);
+}
+
+.back-to-top{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:54px;
+  height:54px;
+  border:none;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-size:22px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 18px 40px rgba(30,58,138,.28);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(16px);
+  transition:.25s;
+  z-index:1900;
+}
+
+.back-to-top.show{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media (max-width: 1180px){
+  .nav{display:none}
+  .burger{display:block}
+  .header-phone{display:none}
+  .hero-grid,
+  .about-wrap,
+  .process-wrap,
+  .contacts-grid{
+    grid-template-columns:1fr;
+  }
+  .grid-4,
+  .services-grid,
+  .advantages-grid,
+  .work-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .trust-box,
+  .quick-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .object-types{
+    grid-template-columns:repeat(3,1fr);
+  }
+  .footer-top{
+    grid-template-columns:1fr;
+  }
+  .footer-contacts{
+    justify-items:start;
+    text-align:left;
+  }
+}
+
+@media (max-width: 768px){
+  section{padding:72px 0}
+  .header-inner{min-height:74px}
+  .hero{padding:56px 0 30px}
+  .hero h1{font-size:40px}
+  .hero p{font-size:17px}
+  .title{font-size:30px}
+  .subtitle{font-size:16px}
+  .hero-main,
+  .hero-side,
+  .about-main,
+  .about-side,
+  .process-aside,
+  .steps,
+  .contact-card,
+  .card,
+  .service-card,
+  .adv-card,
+  .quick-card,
+  .object-card,
+  .modal-content{
+    padding:24px;
+  }
+  .grid-4,
+  .services-grid,
+  .advantages-grid,
+  .work-grid,
+  .object-types{
+    grid-template-columns:1fr;
+  }
+  .stats,
+  .service-list,
+  .form-grid,
+  .steps,
+  .quick-grid,
+  .contact-actions{
+    grid-template-columns:1fr;
+  }
+  .trust-box{
+    grid-template-columns:1fr;
+  }
+  .cta-box{
+    padding:30px;
+    grid-template-columns:1fr;
+  }
+  .cta-box h2{font-size:30px}
+  .work-card{height:300px}
+  .footer-box{padding:24px 22px}
+  .footer-company-title{font-size:20px}
+  .footer-address{font-size:16px}
+  .footer-contact-link,
+  .footer-contact-email{font-size:20px}
+}
+
+@media (max-width: 560px){
+  .container{padding:0 16px}
+  .logo{font-size:18px}
+  .header-actions .btn{display:none}
+  .hero h1{font-size:32px}
+  .badges{gap:10px}
+  .badge{font-size:12px;padding:9px 13px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .btn{width:100%}
+  .modal{
+    padding:12px;
+    align-items:flex-end;
+  }
+  .modal-content{
+    max-height:88vh;
+    border-bottom-left-radius:0;
+    border-bottom-right-radius:0;
+    padding:22px 18px 20px;
+  }
+  .modal-close{
+    top:10px;
+    right:10px;
+    width:40px;
+    height:40px;
+    font-size:22px;
+  }
+  .back-to-top{
+    right:14px;
+    bottom:14px;
+    width:50px;
+    height:50px;
+  }
+  .footer-box{
+    padding:20px 18px;
+    border-radius:20px;
+  }
+  .footer-company-title{font-size:18px}
+  .footer-company-subtitle{font-size:12px}
+  .footer-address{font-size:15px}
+  .footer-contact-link,
+  .footer-contact-email{
+    font-size:18px;
+    word-break:break-word;
+  }
+  .footer-bottom{font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo">SYSTEMS<span>-SB</span></div>
+
+      <nav class="nav">
+        <a href="#about">О компании</a>
+        <a href="#services">Услуги</a>
+        <a href="#objects">Объекты</a>
+        <a href="#process">Этапы</a>
+        <a href="#cases">Портфолио</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="header-phone">
+          <a href="tel:+78122441238">8 (812) 244-12-38</a>
+          <span>связаться с нами</span>
+        </div>
+        <button class="btn btn-main" onclick="openModal('modal')">Оставить заявку</button>
+      </div>
+
+      <button class="burger" aria-label="Открыть меню" onclick="openMobileMenu()">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-panel">
+    <div class="mobile-top">
+      <div class="logo">SYSTEMS<span>-SB</span></div>
+      <button class="mobile-close" aria-label="Закрыть меню" onclick="closeMobileMenu()">×</button>
+    </div>
+
+    <div class="mobile-links">
+      <a href="#about" onclick="closeMobileMenu()">О компании</a>
+      <a href="#services" onclick="closeMobileMenu()">Услуги</a>
+      <a href="#objects" onclick="closeMobileMenu()">Объекты</a>
+      <a href="#process" onclick="closeMobileMenu()">Этапы работы</a>
+      <a href="#cases" onclick="closeMobileMenu()">Портфолио</a>
+      <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+      <a href="#contacts" onclick="closeMobileMenu()">Контакты</a>
+    </div>
+
+    <div class="mobile-actions">
+      <div class="mobile-phone">
+        <strong><a href="tel:+78122441238">8 (812) 244-12-38</a></strong>
+        <span>телефон для связи</span>
+      </div>
+      <button class="btn btn-main" onclick="closeMobileMenu(); openModal('modal');">Оставить заявку</button>
+      <a class="btn" href="mailto:info@systems-sb.ru" onclick="closeMobileMenu()">Написать на email</a>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="container">
+
+    <section class="hero reveal">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <div class="hero-label">Проектирование, монтаж и обслуживание</div>
+
+          <h1>Системы безопасности и электромонтаж под ключ</h1>
+
+          <p>
+            Проектируем, монтируем и сопровождаем инженерные системы на коммерческих,
+            административных и производственных объектах.
+          </p>
+
+          <div class="badges">
+            <div class="badge">Юридические лица</div>
+            <div class="badge">Лицензия МЧС</div>
+            <div class="badge">Под ключ</div>
+            <div class="badge">Санкт-Петербург</div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-main" onclick="openModal('modal')">Получить расчёт</button>
+            <a href="#cases" class="btn">Смотреть портфолио</a>
+          </div>
+
+          <div class="hero-note">
+            Пожарная сигнализация, СОУЭ, пожаротушение, СКУД, видеонаблюдение, СКС и электромонтажные работы.
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="side-card">
+            <strong>Направления работ</strong>
+            <p>Пожарная сигнализация, охранные системы, контроль доступа, видеонаблюдение, СКС, автоматическое пожаротушение и электромонтаж.</p>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-value">АПС</div>
+              <div class="stat-label">проектирование и монтаж</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">СКУД</div>
+              <div class="stat-label">контроль доступа</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">СКС</div>
+              <div class="stat-label">кабельная инфраструктура</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">IP</div>
+              <div class="stat-label">видеонаблюдение</div>
+            </div>
+          </div>
+
+          <div class="side-card">
+            <strong>Для кого работаем</strong>
+            <p>Офисы, гостиницы, медицинские учреждения, автосалоны, фитнес-клубы, производственные и коммерческие объекты.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-strip reveal">
+      <div class="quick-grid">
+        <div class="quick-card">
+          <strong>Быстрый контакт</strong>
+          <span>Телефон, email и форма обращения доступны с любого экрана.</span>
+        </div>
+        <div class="quick-card">
+          <strong>Полный цикл</strong>
+          <span>От анализа объекта и подбора решения до эксплуатации и сопровождения.</span>
+        </div>
+        <div class="quick-card">
+          <strong>Понятная подача</strong>
+          <span>Сайт показывает услуги, объекты, этапы работ и контактные точки без перегруза.</span>
+        </div>
+        <div class="quick-card">
+          <strong>Готовность к запуску</strong>
+          <span>Дальше останется только подключить реальные формы и приём заявок.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip reveal">
+      <div class="trust-box">
+        <div class="trust-item">
+          <strong>Комплексный подход</strong>
+          <span>От проектирования до эксплуатации и сопровождения.</span>
+        </div>
+        <div class="trust-item">
+          <strong>Работа по нормативам</strong>
+          <span>С учётом требований действующего законодательства.</span>
+        </div>
+        <div class="trust-item">
+          <strong>Коммерческие объекты</strong>
+          <span>Опыт работы с бизнесом и сложными площадками.</span>
+        </div>
+        <div class="trust-item">
+          <strong>Гарантия</strong>
+          <span>На оборудование и выполненные работы.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-head">
+        <h2 class="title">Почему выбирают SYSTEMS-SB</h2>
+        <p class="subtitle">
+          Работаем с инженерными системами, где важны надёжность, нормативы и понятный результат.
+        </p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Полный цикл работ</h3>
+          <p>Проектирование, монтаж, модернизация, обслуживание и эксплуатация систем.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <h3>Документация</h3>
+          <p>Подготовка и сопровождение с учётом требований объекта и нормативной базы.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚙️</div>
+          <h3>Техническая экспертиза</h3>
+          <p>Работаем с системами пожарной безопасности, СКУД, видеонаблюдением, СКС и электромонтажом.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🤝</div>
+          <h3>Работа с бизнесом</h3>
+          <p>Реализуем решения для коммерческих, административных и производственных объектов.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="reveal">
+      <div class="section-head">
+        <h2 class="title">О компании</h2>
+        <p class="subtitle">
+          SYSTEMS-SB выполняет проектирование, монтаж и обслуживание инженерных систем безопасности и электромонтажных работ.
+        </p>
+      </div>
+
+      <div class="about-wrap">
+        <div class="about-main">
+          <h3>Инженерные системы безопасности под ключ</h3>
+
+          <p>
+            Компания SYSTEMS-SB специализируется на проектировании, монтаже и техническом обслуживании
+            систем безопасности для коммерческих, административных и производственных объектов.
+          </p>
+
+          <p>
+            Выполняем полный цикл работ: от подбора решения и подготовки документации
+            до монтажа, запуска и дальнейшего сопровождения объекта.
+          </p>
+
+          <p>
+            Все работы выполняются в соответствии с требованиями законодательства и
+            с гарантией на оборудование и выполненные работы.
+          </p>
+
+          <div class="service-list">
+            <div class="service-item">Автоматическая пожарная сигнализация</div>
+            <div class="service-item">Речевое оповещение и СОУЭ</div>
+            <div class="service-item">Охранная сигнализация</div>
+            <div class="service-item">Системы контроля доступа</div>
+            <div class="service-item">IP-видеонаблюдение</div>
+            <div class="service-item">СКС и электромонтаж</div>
+          </div>
+
+          <div class="hero-actions" style="margin-bottom:0;">
+            <button class="btn btn-main" onclick="openModal('aboutModal')">Подробнее</button>
+            <button class="btn" onclick="openModal('modal')">Оставить заявку</button>
+          </div>
+        </div>
+
+        <div class="about-side">
+          <h3>Ключевая информация</h3>
+          <div class="info-stack">
+            <div class="info-card">
+              <strong>Формат работы</strong>
+              <span>Проектирование, монтаж, модернизация, эксплуатация и техническое обслуживание.</span>
+            </div>
+            <div class="info-card">
+              <strong>Объекты</strong>
+              <span>Автосалоны, фитнес-клубы, гостиницы, больницы, производственные и коммерческие площадки.</span>
+            </div>
+            <div class="info-card">
+              <strong>Адрес</strong>
+              <span>195253, г. Санкт-Петербург, пр. Энергетиков, д.70, лит.Б, офис 204А.</span>
+            </div>
+            <div class="info-card">
+              <strong>Контакты</strong>
+              <span>8 (812) 244-12-38 · info@systems-sb.ru</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="objects" class="reveal">
+      <div class="section-head">
+        <h2 class="title">Типы объектов</h2>
+        <p class="subtitle">
+          Работаем с объектами разного назначения и подбираем решения под их реальный режим эксплуатации.
+        </p>
+      </div>
+
+      <div class="object-types">
+        <div class="object-card">
+          <strong>Автосалоны</strong>
+          <span>коммерческие площадки и дилерские центры</span>
+        </div>
+        <div class="object-card">
+          <strong>Фитнес-клубы</strong>
+          <span>объекты с высокой проходимостью</span>
+        </div>
+        <div class="object-card">
+          <strong>Гостиницы</strong>
+          <span>объекты с постоянным пребыванием людей</span>
+        </div>
+        <div class="object-card">
+          <strong>Медицинские учреждения</strong>
+          <span>требовательные и ответственные объекты</span>
+        </div>
+        <div class="object-card">
+          <strong>Производство и офисы</strong>
+          <span>коммерческая и инженерная инфраструктура</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="reveal">
+      <div class="section-head">
+        <h2 class="title">Основные услуги</h2>
+        <p class="subtitle">
+          Реализуем инженерные системы безопасности и электромонтажные работы для объектов различного назначения.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🔥</div>
+          <h3>Пожарная сигнализация</h3>
+          <p>Проектирование, монтаж, модернизация и эксплуатация систем пожарной безопасности.</p>
+          <ul>
+            <li>Автоматическая пожарная сигнализация</li>
+            <li>СОУЭ</li>
+            <li>Подготовка к эксплуатации</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">💧</div>
+          <h3>Автоматическое пожаротушение</h3>
+          <p>Монтаж и эксплуатация установок автоматического пожаротушения.</p>
+          <ul>
+            <li>Инженерная проработка решений</li>
+            <li>Монтаж оборудования</li>
+            <li>Сопровождение эксплуатации</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔐</div>
+          <h3>Охранная сигнализация и СКУД</h3>
+          <p>Системы охранной сигнализации и контроля доступа для коммерческих и административных объектов.</p>
+          <ul>
+            <li>Охранная сигнализация</li>
+            <li>Контроль и управление доступом</li>
+            <li>Модернизация действующих систем</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📹</div>
+          <h3>IP-видеонаблюдение</h3>
+          <p>Монтаж, модернизация и эксплуатация систем IP-видеонаблюдения.</p>
+          <ul>
+            <li>Видеонаблюдение Trassir</li>
+            <li>Подбор оборудования</li>
+            <li>Интеграция с инфраструктурой объекта</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🧩</div>
+          <h3>СКС</h3>
+          <p>Структурированные кабельные системы как основа для стабильной работы инженерной инфраструктуры.</p>
+          <ul>
+            <li>Проектирование и монтаж СКС</li>
+            <li>Кабельные трассы</li>
+            <li>Подготовка под расширение</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">⚡</div>
+          <h3>Электромонтажные работы</h3>
+          <p>Комплексные электромонтажные работы на новых и действующих объектах.</p>
+          <ul>
+            <li>Силовые и слаботочные линии</li>
+            <li>Щитовое оборудование</li>
+            <li>Комплексное выполнение работ</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="reveal">
+      <div class="section-head">
+        <h2 class="title">Этапы работы</h2>
+        <p class="subtitle">
+          Понятный порядок взаимодействия по объекту — от обращения до ввода систем в эксплуатацию.
+        </p>
+      </div>
+
+      <div class="process-wrap">
+        <div class="process-aside">
+          <h3>Как мы работаем</h3>
+          <p>
+            Выстраиваем работу по объекту последовательно: анализ задачи, подбор решения,
+            согласование состава работ, монтаж, запуск и сопровождение.
+          </p>
+
+          <div class="aside-points">
+            <div class="aside-point">Сбор вводных по объекту</div>
+            <div class="aside-point">Подбор технического решения</div>
+            <div class="aside-point">Согласование объёма работ</div>
+            <div class="aside-point">Монтаж и сопровождение</div>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Заявка</h3>
+            <p>Получаем информацию по объекту и задачам.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Анализ</h3>
+            <p>Определяем состав работ и требования площадки.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Решение</h3>
+            <p>Подбираем оборудование и формируем технический состав проекта.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Монтаж</h3>
+            <p>Выполняем работы на объекте и проводим пусконаладку.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <h3>Эксплуатация</h3>
+            <p>Передаём системы в работу и обеспечиваем сопровождение.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">6</div>
+            <h3>Обслуживание</h3>
+            <p>Проводим техническое обслуживание и модернизацию при необходимости.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases" class="reveal">
+      <div class="section-head">
+        <h2 class="title">Портфолио</h2>
+        <p class="subtitle">
+          Реализованные объекты и выполненные работы.
+        </p>
+      </div>
+
+      <div class="work-grid">
+        <div class="work-card" onclick="openCase('autoforum')">
+          <img src="image_42882d.png" alt='ООО "Автофорум Нева"'>
+          <div class="work-info">
+            <h3>ООО «Автофорум Нева»</h3>
+            <p>Официальный дилер Mercedes-Benz</p>
+          </div>
+        </div>
+
+        <div class="work-card" onclick="openCase('parus')">
+          <img src="image_42848d.png" alt='Сеть фитнес-клубов "Парус"'>
+          <div class="work-info">
+            <h3>Сеть фитнес-клубов «Парус»</h3>
+            <p>Пожаротушение, АПС и оповещение</p>
+          </div>
+        </div>
+
+        <div class="work-card" onclick="openCase('nevskyforum')">
+          <img src="image_4287c9.jpg" alt='Отель "Невский Форум"'>
+          <div class="work-info">
+            <h3>Отель «Невский Форум»</h3>
+            <p>АПС и управление эвакуацией</p>
+          </div>
+        </div>
+
+        <div class="work-card" onclick="openCase('gb31')">
+          <img src="image_4287c9.jpg" alt="Городская больница №31">
+          <div class="work-info">
+            <h3>Городская больница №31</h3>
+            <p>IP-видеонаблюдение, охранка и СКС</p>
+          </div>
+        </div>
+
+        <div class="work-card" onclick="openCase('rigel')">
+          <img src="image_42882d.png" alt='Аккумуляторная компания "РИГЕЛЬ"'>
+          <div class="work-info">
+            <h3>АК «РИГЕЛЬ»</h3>
+            <p>Модернизация и эксплуатация систем</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-head">
+        <h2 class="title">Преимущества работы с нами</h2>
+        <p class="subtitle">
+          Решения для объектов, где важны надёжность, эксплуатация и дальнейшее сопровождение.
+        </p>
+      </div>
+
+      <div class="advantages-grid">
+        <div class="adv-card">
+          <h3>Комплексная реализация</h3>
+          <p>Монтаж, модернизация, эксплуатация и техническое обслуживание в рамках одного подрядчика.</p>
+        </div>
+        <div class="adv-card">
+          <h3>Опыт на разных типах объектов</h3>
+          <p>Гостиницы, больницы, фитнес-клубы, автосалоны, коммерческие и производственные площадки.</p>
+        </div>
+        <div class="adv-card">
+          <h3>Практичный подход</h3>
+          <p>Системы подбираются под задачи объекта, его режим работы и инженерную инфраструктуру.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta reveal">
+      <div class="cta-box">
+        <div>
+          <h2>Нужен расчёт или консультация по объекту?</h2>
+          <p>
+            Оставьте заявку, чтобы обсудить состав работ, техническое решение и порядок реализации.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a class="btn btn-light" href="tel:+78122441238">Позвонить</a>
+          <button class="btn btn-danger" onclick="openModal('modal')">Оставить заявку</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="reveal">
+      <div class="section-head">
+        <h2 class="title">Частые вопросы</h2>
+        <p class="subtitle">
+          Краткие ответы на основные вопросы по услугам и формату работы.
+        </p>
+      </div>
+
+      <div class="faq">
+        <div class="faq-item active">
+          <button class="faq-question" type="button">
+            <span>Какие системы вы монтируете и обслуживаете?</span>
+            <span>−</span>
+          </button>
+          <div class="faq-answer">
+            <p>Автоматическую пожарную сигнализацию, речевое оповещение и управление эвакуацией, автоматическое пожаротушение, охранную сигнализацию, системы контроля доступа, IP-видеонаблюдение, СКС и электромонтажные системы.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Вы выполняете только монтаж?</span>
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Нет. Компания выполняет монтаж, модернизацию, эксплуатацию и техническое обслуживание систем.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>С какими объектами вы работаете?</span>
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>С коммерческими, административными, производственными, медицинскими и гостиничными объектами.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Можно ли обсудить объект до точной сметы?</span>
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Да. После обращения уточняются задачи, тип объекта, состав работ и предлагается подходящее решение.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts" class="reveal">
+      <div class="section-head">
+        <h2 class="title">Контакты</h2>
+        <p class="subtitle">
+          Свяжитесь с нами для обсуждения объекта, расчёта и подбора технического решения.
+        </p>
+      </div>
+
+      <div class="contacts-grid">
+        <div class="contact-card">
+          <h3>Контактная информация</h3>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <strong>Адрес</strong>
+              <span>195253, г. Санкт-Петербург, пр. Энергетиков, д.70, лит.Б, офис 204А</span>
+            </div>
+            <div class="contact-item">
+              <strong>Email</strong>
+              <a href="mailto:info@systems-sb.ru">info@systems-sb.ru</a>
+            </div>
+            <div class="contact-item">
+              <strong>Телефон</strong>
+              <a href="tel:+78122441238">8 (812) 244-12-38</a>
+            </div>
+            <div class="contact-item">
+              <strong>Основные направления</strong>
+              <span>АПС, СОУЭ, пожаротушение, охранная сигнализация, СКУД, IP-видеонаблюдение, СКС, электромонтаж.</span>
+            </div>
+          </div>
+
+          <div class="contact-actions">
+            <a class="btn btn-light" href="tel:+78122441238">Позвонить</a>
+            <a class="btn btn-light" href="mailto:info@systems-sb.ru">Написать</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Оставить заявку</h3>
+
+          <form id="contactForm">
+            <div class="form-grid">
+              <input class="form-input" name="name" placeholder="Ваше имя" required>
+              <input class="form-input" name="phone" placeholder="Контактный телефон" required>
+            </div>
+
+            <div class="form-grid">
+              <input class="form-input" name="company" placeholder="Компания / объект">
+              <select class="form-select" name="type">
+                <option value="">Тип задачи</option>
+                <option>Пожарная сигнализация</option>
+                <option>Пожаротушение</option>
+                <option>Охранная сигнализация / СКУД</option>
+                <option>IP-видеонаблюдение</option>
+                <option>СКС</option>
+                <option>Электромонтаж</option>
+                <option>Обслуживание / эксплуатация</option>
+              </select>
+            </div>
+
+            <textarea class="form-input" name="message" placeholder="Опишите объект и задачу"></textarea>
+
+            <label class="checkbox">
+              <input type="checkbox" required>
+              <span>Согласен на обработку контактных данных для обратной связи.</span>
+            </label>
+
+            <button class="btn btn-main" type="submit">Отправить заявку</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-box">
+      <div class="footer-top">
+        <div class="footer-company">
+          <div class="footer-company-subtitle">ООО «Системс-Секьюрити»</div>
+          <div class="footer-address">
+            Адрес: 195253, г. Санкт-Петербург,<br>
+            пр. Энергетиков, д.70, лит.Б, офис 204 А
+          </div>
+        </div>
+
+        <div class="footer-contacts">
+          <a class="footer-contact-link" href="tel:+78122441238">8 (812) 244-12-38</a>
+          <a class="footer-contact-email" href="mailto:info@systems-sb.ru"><span>email:</span> info@systems-sb.ru</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© SYSTEMS-SB</div>
+        <div>Системы безопасности и электромонтаж под ключ</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Наверх">↑</button>
+
+<div class="modal" id="modal">
+  <div class="modal-content modal-small">
+    <button class="modal-close" type="button" onclick="closeModal('modal')" aria-label="Закрыть">×</button>
+
+    <h3>Оставить заявку</h3>
+    <p>Опишите задачу, и мы свяжемся с вами для уточнения деталей по объекту.</p>
+
+    <form id="modalForm">
+      <input class="form-input" name="name" placeholder="Ваше имя" required>
+      <input class="form-input" name="phone" placeholder="Контактный телефон" required>
+
+      <select class="form-select" name="type">
+        <option value="">Выберите направление</option>
+        <option>Пожарная сигнализация</option>
+        <option>Пожаротушение</option>
+        <option>Охранная сигнализация / СКУД</option>
+        <option>IP-видеонаблюдение</option>
+        <option>СКС</option>
+        <option>Электромонтаж</option>
+        <option>Обслуживание / эксплуатация</option>
+      </select>
+
+      <textarea class="form-input" name="message" placeholder="Кратко опишите объект и задачу"></textarea>
+
+      <label class="checkbox">
+        <input type="checkbox" required>
+        <span>Согласен на обработку контактных данных для обратной связи.</span>
+      </label>
+
+      <button class="btn btn-main" style="width:100%;" type="submit">Отправить заявку</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="aboutModal">
+  <div class="modal-content">
+    <button class="modal-close" type="button" onclick="closeModal('aboutModal')" aria-label="Закрыть">×</button>
+
+    <h3>О компании SYSTEMS-SB</h3>
+    <p>
+      SYSTEMS-SB предлагает широкий спектр услуг по монтажу и обслуживанию систем безопасности,
+      включая автоматическую пожарную сигнализацию, системы охранной сигнализации, СКУД,
+      IP-видеонаблюдение, СКС и электромонтажные работы.
+    </p>
+    <p>
+      Компания выполняет проектирование, монтаж, модернизацию, эксплуатацию и техническое обслуживание
+      инженерных систем на коммерческих, административных и производственных объектах.
+    </p>
+    <p>
+      Все работы выполняются в соответствии с требованиями законодательства
+      и с гарантией на оборудование и выполненные работы.
+    </p>
+
+    <h4>Адрес</h4>
+    <p>195253, г. Санкт-Петербург, пр. Энергетиков, д.70, лит.Б, офис 204А</p>
+
+    <div class="modal-actions">
+      <a class="btn btn-light" href="tel:+78122441238">Позвонить</a>
+      <button class="btn btn-main" onclick="closeModal('aboutModal'); openModal('modal');">Оставить заявку</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="caseModal">
+  <div class="modal-content">
+    <button class="modal-close" type="button" onclick="closeModal('caseModal')" aria-label="Закрыть">×</button>
+
+    <h3 id="caseTitle">Объект</h3>
+    <p id="caseLocation">Адрес объекта</p>
+
+    <h4>Выполненные работы</h4>
+    <ul id="caseList">
+      <li>Описание работ</li>
+    </ul>
+
+    <div class="modal-actions">
+      <a class="btn btn-light" href="tel:+78122441238">Позвонить</a>
+      <button class="btn btn-main" onclick="closeModal('caseModal'); openModal('modal');">Обсудить проект</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Спасибо! Заявка принята. Это демонстрационная отправка формы.</div>
+
+<script>
+const body = document.body;
+const backToTop = document.getElementById('backToTop');
+const toast = document.getElementById('toast');
+const mobileMenu = document.getElementById('mobileMenu');
+
+const caseData = {
+  autoforum: {
+    title: 'ООО «Автофорум Нева»',
+    location: 'Санкт-Петербург, ул. Орбели, д.35, к.2',
+    list: [
+      'Монтаж и эксплуатация установок автоматической пожарной сигнализации',
+      'Монтаж и эксплуатация систем речевого оповещения и управления эвакуацией при пожаре',
+      'Монтаж систем охранной сигнализации',
+      'Расчёт пожарных рисков'
+    ]
+  },
+  parus: {
+    title: 'Сеть фитнес-клубов «Парус»',
+    location: 'Санкт-Петербург',
+    list: [
+      'Монтаж и эксплуатация установок автоматического пожаротушения',
+      'Монтаж и эксплуатация автоматической пожарной сигнализации',
+      'Монтаж и эксплуатация систем оповещения о пожаре'
+    ]
+  },
+  nevskyforum: {
+    title: 'Отель «Невский Форум»',
+    location: 'Санкт-Петербург, Невский проспект, д.69',
+    list: [
+      'Монтаж и эксплуатация автоматической пожарной сигнализации',
+      'Монтаж и эксплуатация систем оповещения и управления эвакуацией при пожаре'
+    ]
+  },
+  gb31: {
+    title: 'Городская больница №31',
+    location: 'Санкт-Петербург, Крестовский остров, проспект Динамо, д.3',
+    list: [
+      'Монтаж и эксплуатация систем IP-видеонаблюдения (Trassir)',
+      'Монтаж и эксплуатация системы охранной сигнализации',
+      'Монтаж и эксплуатация СКС'
+    ]
+  },
+  rigel: {
+    title: 'Аккумуляторная компания «РИГЕЛЬ»',
+    location: 'Санкт-Петербург, ул. Профессора Попова, д.38',
+    list: [
+      'Ремонт систем видеонаблюдения',
+      'Модернизация и эксплуатация систем видеонаблюдения',
+      'Модернизация и эксплуатация систем контроля доступа',
+      'Модернизация и эксплуатация системы охранной сигнализации',
+      'Модернизация и эксплуатация СКС'
+    ]
+  }
+};
+
+function syncBodyState(){
+  const hasOpenModal = document.querySelector('.modal.active');
+  const menuOpen = mobileMenu.classList.contains('active');
+  body.classList.toggle('modal-open', !!hasOpenModal);
+  body.classList.toggle('menu-open', menuOpen);
+}
+
+function openModal(id){
+  const modal = document.getElementById(id);
+  if(!modal) return;
+  modal.classList.add('active');
+  syncBodyState();
+}
+
+function closeModal(id){
+  const modal = document.getElementById(id);
+  if(!modal) return;
+  modal.classList.remove('active');
+  syncBodyState();
+}
+
+function openCase(key){
+  const data = caseData[key];
+  if(!data) return;
+
+  document.getElementById('caseTitle').innerText = data.title;
+  document.getElementById('caseLocation').innerText = data.location;
+
+  const list = document.getElementById('caseList');
+  list.innerHTML = '';
+  data.list.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    list.appendChild(li);
+  });
+
+  openModal('caseModal');
+}
+
+function openMobileMenu(){
+  mobileMenu.classList.add('active');
+  syncBodyState();
+}
+
+function closeMobileMenu(){
+  mobileMenu.classList.remove('active');
+  syncBodyState();
+}
+
+document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', function(e){
+    if(e.target === modal){
+      modal.classList.remove('active');
+      syncBodyState();
+    }
+  });
+});
+
+mobileMenu.addEventListener('click', function(e){
+  if(e.target === mobileMenu){
+    closeMobileMenu();
+  }
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.modal.active').forEach(modal => modal.classList.remove('active'));
+    closeMobileMenu();
+    syncBodyState();
+  }
+});
+
+window.addEventListener('scroll', function(){
+  if(window.scrollY > 350){
+    backToTop.classList.add('show');
+  } else {
+    backToTop.classList.remove('show');
+  }
+});
+
+backToTop.addEventListener('click', function(){
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+function showToast(message){
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+function handleDemoForm(form){
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    form.reset();
+    document.querySelectorAll('.modal.active').forEach(modal => modal.classList.remove('active'));
+    syncBodyState();
+    showToast('Спасибо! Заявка принята. Это демонстрационная отправка формы.');
+  });
+}
+
+handleDemoForm(document.getElementById('contactForm'));
+handleDemoForm(document.getElementById('modalForm'));
+
+document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', function(){
+    const item = this.closest('.faq-item');
+    const opened = item.classList.contains('active');
+
+    document.querySelectorAll('.faq-item').forEach(faq => {
+      faq.classList.remove('active');
+      faq.querySelector('.faq-question span:last-child').textContent = '+';
+    });
+
+    if(!opened){
+      item.classList.add('active');
+      this.querySelector('span:last-child').textContent = '−';
+    }
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
